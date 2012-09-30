@@ -12,11 +12,12 @@ dies ist [meine GitHub User Page](http://simonwaldherr.github.com/)
 * <https://github.com/SimonWaldherr/loginCtrl>
 * <https://github.com/SimonWaldherr/OpenShownotesFormat>
 * <https://github.com/SimonWaldherr/shownot.es>
+* <https://github.com/SimonWaldherr/Die-Gedanken-sind-frei>
 * **forks:**
 	* <https://github.com/SimonWaldherr/wavepad>
 	* <https://github.com/SimonWaldherr/ImageManagerOnline>
 	* <https://github.com/SimonWaldherr/buttons-and-forms>
-	* <https://github.com/SimonWaldherr/FSK-Serial-Generator-in-JavaScript>
+	* <https://github.com/SimonWaldherr/FSK-Encoder.js>
 	* <https://github.com/SimonWaldherr/reqwest>
 
 **...**
