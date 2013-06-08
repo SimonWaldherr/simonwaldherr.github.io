@@ -2,13 +2,15 @@
 <head>
 <meta charset="UTF-8">
 <title>SimonWaldherr @ GitHub</title>
+<link href="https://a248.e.akamai.net/assets.github.com/assets/github-a4c524f2138ecc4dd5bf9b8a6b1517bf38aa7b65.css" rel="stylesheet" type="text/css">
 <link href="http://simonwaldherr.github.io/majaX.js/style.css" rel="stylesheet" type="text/css">
+<link href="./style.css" rel="stylesheet" type="text/css">
 <script src="http://simonwaldherr.github.io/majaX.js/majax.js"></script>
 <script src="http://simonwaldherr.github.io/disTime.js/disTime.js"></script>
 </head>
 <body>
   <h1>Simon Waldherr @ GitHub</h1>
-  <div id="repo"></div>
+  <div id="repo" class="repo-tab"></div>
 </body>
 <script>
   var repoContent, repoName, foldername = false, userName, repos, apiurl, root;
@@ -17,19 +19,24 @@
   majaX({url:apiurl, method:'GET'}, function(json) {repos = json; buildRepoTable();});
 
   function buildRepoTable () {
-    var i = 0, string = '<table>';
-    string += '<thead><tr><th>name</th><th>size</th><th>last update</th><th>stars</th><th>forks</th><th>description</th><th></th></tr></thead><tbody>';
+    var i = 0, string = '';
+    string += '<ul class="repolist js-repo-list" data-filterable-for="your-repos-filter" data-filterable-type="substring">';
     for (i = 0; i < repos.length; i++) {
       lastUpdate = new Date(repos[i].updated_at);
       if (repos[i].fork === false) {
-        string += '<tr style="background:#eee;"><td>';
+        string += '<li class="simple public source">';
       } else {
-        string += '<tr style="background:#ddd;"><td>';
+        string += '<li class="simple public fork">';
       }
-
-      string += repos[i].name+'</td><td>'+repos[i].size+'kB</td><td><p class="distime" data-time="' + lastUpdate.getTime()/1000 + '"></p></td><td>' + repos[i].watchers_count + '</td><td>' + repos[i].forks_count + '</td><td>'+repos[i].description+'</td><td><a href="#" onclick="repoName = \'' + repos[i].name + '\'; root = 1; openRepoDir(); return false;">open</a></td></tr>';
+      string += '<ul class="repo-stats"><li class="stargazers"><a href="https://github.com/SimonWaldherr/' + repos[i].name + '/stargazers" title="Stargazers"><span class="octicon octicon-star"></span> ' + repos[i].watchers_count + '</a></li><li class="forks"><a href="https://github.com/SimonWaldherr/' + repos[i].name + '/network" title="Forks"><span class="octicon octicon-git-branch"></span> ' + repos[i].forks_count + '</a></li></ul><h3>';
+      if (repos[i].fork === false) {
+        string += '<span class="mega-octicon octicon-repo">';
+      } else {
+        string += '<span class="mega-octicon octicon-repo-forked">';
+      }
+      string += '</span><a href="https://github.com/SimonWaldherr/' + repos[i].name + '">' + repos[i].name + '</a></h3><div class="body"><p class="description">' + repos[i].description + '</p><p class="updated-at">Last updated <time class="js-relative-date distime" data-time="' + lastUpdate.getTime()/1000 + '"></time></p><div class="participation-graph"></div></div></li>';
     }
-    string += '</tbody></table>';
+    string += '</ul>';
     document.getElementById('repo').innerHTML = string;
     initDisTime();
   }
